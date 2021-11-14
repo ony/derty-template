@@ -4,6 +4,10 @@ pkgs.mkShell {
     debianutils
     libnotify
     timewarrior
+
+    (pkgs.python3.withPackages (pp: with pp; [
+      isodate
+    ]))
   ];
   shellHook = ''
     export HISTFILE="$PWD/.history"
