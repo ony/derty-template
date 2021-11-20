@@ -4,7 +4,7 @@ readonly events_maxdepth=16
 
 set -ex
 
-[[ -z "$EVENTS_DIR" ]] && export EVENTS_DIR=$(readlink -f "$(dirname $0)")
+[[ -z "$EVENTS_DIR" ]] && export EVENTS_DIR=$(dirname "$(readlink -f "$0")")
 
 if [[ -z "$EVENTS_LVL" ]]; then
     EVENTS_LVL=1
@@ -45,4 +45,4 @@ for script in "$EVENTS_DIR"/"$EVENT"{,.zsh,.bash,.sh}; do
     fi
 done
 
-exec run-parts --regex='.*' "${args[@]}" "$EVENTS_DIR/${EVENT}.d"
+exec run-parts --regex='.*' "${runparts_args[@]}" "$EVENTS_DIR/${EVENT}.d"
