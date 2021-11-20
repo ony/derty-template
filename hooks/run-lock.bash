@@ -4,7 +4,7 @@
 #
 # Example: ./run-lock.bash swaylock
 
-readonly events_dir="$(dirname "$0")/../events"
+readonly events_dir="$(dirname $(readlink -f "$0"))/../events"
 trigger() { "$events_dir/trigger.bash" "$@"; }
 
 trigger locking
