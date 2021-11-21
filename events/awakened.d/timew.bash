@@ -3,7 +3,7 @@
 
 readonly ignore_idle_seconds=5
 
-set -ex
+set -e
 [[ "$IDLE_SECONDS" -le $ignore_idle_seconds ]] && exit
 
 if timew stop "${IDLE_SECONDS}sec" ago :quiet; then

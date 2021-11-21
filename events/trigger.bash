@@ -2,7 +2,7 @@
 
 readonly events_maxdepth=16
 
-set -ex
+set -e
 
 [[ -z "$EVENTS_DIR" ]] && export EVENTS_DIR=$(dirname "$(readlink -f "$0")")
 
