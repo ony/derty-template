@@ -32,6 +32,9 @@ def active_track() -> Optional[timedelta]:
 
 def total_gaps_time(*args) -> timedelta:
     total_line = [line.strip() for line in timew('gaps', *args).splitlines() if line][-1]
+    if 'No gaps found' in total_line:
+        # There are some days when there is no work times
+        return timedelta(seconds=0)
     return parse_time(total_line)
 
 def total_summary_time(*args) -> timedelta:
