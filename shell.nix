@@ -6,6 +6,7 @@ pkgs.mkShell {
     timewarrior
     fzf
     python3Packages.markdownify
+    pandoc
 
     (pkgs.python3.withPackages (pp: with pp; [
       isodate

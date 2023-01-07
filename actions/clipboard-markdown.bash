@@ -19,11 +19,20 @@ detect_env() {
     fi
 }
 
-if ! have_cmd markdownify; then
-    markdownify() {
-        nix run nixpkgs\#python3Packages.markdownify -- "$@"
-    }
-fi
+case "$0" in
+*-markdown.bash)
+    if ! have_cmd markdownify; then
+        markdownify() {
+            nix run nixpkgs\#python3Packages.markdownify -- "$@"
+        }
+    fi
+    from_html() { markdownify; }
+    ;;
+*-xwiki.bash)
+    from_html() { pandoc -r html -w xwiki; }
+    ;;
+*) die "Unsupported alias $0" ;;
+esac
 
 set -e # -x
 
@@ -60,7 +69,7 @@ esac
 
 mimes="$(clip_info)"
 if grep -q "^text/html$" <<< "$mimes"; then
-    clip_out text/html | markdownify | clip_in
+    clip_out text/html | from_html | clip_in
 elif grep -q "^image/png$" <<< "$mimes"; then
     echo "TODO: upload image and form markdown pointing to it" >&2
     # url="$(clip_out image/png | upload_somewhere)"
