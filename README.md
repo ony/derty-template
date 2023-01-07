@@ -29,6 +29,8 @@ environment.
 │   └── ...
 ├── agents
 │   └── ...
+├── actions
+│   └── ...
 └── ...
 ```
 
@@ -47,6 +49,9 @@ mailbox, or git commit-msg hook.
 ### `agents`
 If you cannot get away with just `hooks`, you might need some daemons that
 either listen or monitor something to produce events.
+
+### `actions`
+Set of direct user initiated actions. Intended for discovery by selection UIs.
 
 ## What goes into this repo
 It is subjective choice for mix of specific and generic stuff.
